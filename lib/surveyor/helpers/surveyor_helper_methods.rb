@@ -21,7 +21,7 @@ module Surveyor
         "&nbsp;&nbsp;You answered &quot;#{trigger_responses.join("&quot; and &quot;")}&quot; to the question &quot;#{dependent_questions.map(&:text).join("&quot;,&quot;")}&quot;"
       end
       def menu_button_for(section)
-        button_tag(section.translation(I18n.locale)[:title], :name => "section[#{section.id}]", type: 'submit', class: 'section-submit')
+        submit_tag(section.translation(I18n.locale)[:title], :name => "section[#{section.id}]")
       end
       def previous_section
         # use copy in memory instead of making extra db calls
