@@ -65,7 +65,7 @@ module Surveyor
        def q_text(q, context=nil, locale=nil)
         if q.dependent?  
           q.text_for(nil, context, locale)
-        elsif q.part_of_group? or or q.display_type == "grid"  
+        elsif q.part_of_group?  or q.display_type == "grid"  
            "<span class='required-asterisk'>*</span>"+ q.text_for(nil, context, locale)
         else
           question_number = next_question_number(q)
