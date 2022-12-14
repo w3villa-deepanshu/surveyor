@@ -62,9 +62,11 @@ module Surveyor
         end
       end
 
-      def q_text(q, context=nil, locale=nil)
-        if q.dependent? or q.display_type == "label" or q.display_type == "image" or q.part_of_group?
+       def q_text(q, context=nil, locale=nil)
+        if q.dependent?  
           q.text_for(nil, context, locale)
+        elsif q.part_of_group? or q.display_type == "default" or q.display_type == "default_dropdown" or q.display_type == "dropdown"  or q.display_type == "grid"  or q.display_type == "inline" 
+           "<span class='required-asterisk'>*</span>"+ q.text_for(nil, context, locale)
         else
           question_number = next_question_number(q)
           question_number = "<span class='required-asterisk'>*</span>" + question_number if q.is_mandatory
@@ -74,7 +76,7 @@ module Surveyor
 
       def next_question_number(question)
         @n ||= 0
-        "<span class='qnum'>#{@n += 1}) </span>"
+        "<span class='qnum'>#{@n += 1} </span>"
       end
 
       def question_number_with_text(question_number, text)
